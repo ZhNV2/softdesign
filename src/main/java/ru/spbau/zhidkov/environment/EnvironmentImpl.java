@@ -13,7 +13,7 @@ public class EnvironmentImpl<K, V> implements Environment<K, V> {
     }
 
     @Override
-    public V get(K key) {
-        return map.get(key);
+    public V getOrDefault(K key, V defaultValue) {
+        return map.getOrDefault(key, defaultValue);
     }
 }

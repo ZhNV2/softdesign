@@ -16,10 +16,12 @@ public interface Environment<K, V>  {
 
     /**
      * returns value associated with key.
-     * returns {@code null} if there is no such value
-     * @param key
+     * returns {@param defaultValue} if there is no such value
+     * @param key key
+     * @param defaultValue value to return if key is not presented in
+     *                     environment
      * @return value associated with key
      */
-    V get(K key);
+    V getOrDefault(K key, V defaultValue);
 
 }

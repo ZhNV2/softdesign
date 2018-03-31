@@ -149,7 +149,7 @@ public class Parser {
                     j++;
                 }
                 final String variableName = text.substring(pos + 1, j);
-                final String value = environment.get(variableName);
+                final String value = environment.getOrDefault(variableName, "");
                 if (value == null) {
                     throw new ParseException("variable {" + variableName + "} is not in environment");
                 }

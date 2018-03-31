@@ -20,7 +20,7 @@ public class CommandsTest {
         final Command assignment = new AssignmentCommand();
         final Environment<String, String> environment = new EnvironmentImpl<>();
         final CommandResult commandResult = assignment.execute(Collections.emptyList(), Arrays.asList("file", "tmp"), environment);
-        assertEquals("tmp", environment.get("file"));
+        assertEquals("tmp", environment.getOrDefault("file", ""));
         assertFalse(commandResult.isExit());
     }
 

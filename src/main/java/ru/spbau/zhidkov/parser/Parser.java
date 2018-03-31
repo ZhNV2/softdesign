@@ -11,8 +11,6 @@ import java.util.stream.Collectors;
  */
 public class Parser {
 
-
-
     private enum PieceType {
         OUTSIDE,
         SPACES,
@@ -20,12 +18,11 @@ public class Parser {
         INSIDE_DOUBLE_QUOTES
     }
 
-
     /**
      * Divides input by pipes and parses pieces as commands
      *
      * @param environment environment
-     * @param text input string
+     * @param text        input string
      * @return list of command calls divided by pipes
      */
     public List<CommandCall> process(Environment<String, String> environment, String text) {
@@ -46,8 +43,8 @@ public class Parser {
 
         for (List<Piece> list : piecesWithSubstitutions) {
             final String textWithSubstitutions = list.stream()
-                            .map(Piece::getText)
-                            .collect(Collectors.joining());
+                    .map(Piece::getText)
+                    .collect(Collectors.joining());
             int eqPos = textWithSubstitutions.indexOf("=");
             if (eqPos != -1) {
                 final List<String> args = new ArrayList<>();
@@ -82,7 +79,7 @@ public class Parser {
         return new CommandCall(textPieces.get(0), textPieces.subList(1, textPieces.size()));
     }
 
-    private List<List<Piece> > splitOnPieces(String text) {
+    private List<List<Piece>> splitOnPieces(String text) {
         int pos = 0;
         StringBuilder curText = new StringBuilder();
         final List<List<Piece>> res = new ArrayList<>();

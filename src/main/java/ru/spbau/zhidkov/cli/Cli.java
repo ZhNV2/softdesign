@@ -4,8 +4,10 @@ import ru.spbau.zhidkov.cli.command.*;
 import ru.spbau.zhidkov.environment.Environment;
 import ru.spbau.zhidkov.environment.EnvironmentImpl;
 import ru.spbau.zhidkov.parser.CommandCall;
+import ru.spbau.zhidkov.parser.ParseException;
 import ru.spbau.zhidkov.parser.Parser;
 
+import java.io.IOException;
 import java.util.*;
 
 /**
@@ -43,7 +45,13 @@ public class Cli {
         while (true) {
             System.out.print(">>");
             final String textLine = scanner.nextLine();
-            final List<CommandCall> commandCalls = parser.process(environment, textLine);
+            List<CommandCall> commandCalls;
+            try {
+                commandCalls = parser.process(environment, textLine);
+            } catch (ParseException e) {
+                System.out.println("there is an error in command syntax: " + e.getMessage());
+                continue;
+            }
             List<String> lines = Collections.emptyList();
             boolean isExit = false;
             for (CommandCall commandCall : commandCalls) {
@@ -51,7 +59,7 @@ public class Cli {
                 CommandResult commandResult;
                 try {
                     commandResult = command.execute(lines, commandCall.getArgs(), environment);
-                } catch (Exception e) {
+                } catch (IOException e) {
                     System.out.println("exception during execution");
                     System.out.println(e.getClass().getName() + ": " + e.getMessage());
                     break;

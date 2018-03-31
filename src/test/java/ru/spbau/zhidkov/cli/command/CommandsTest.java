@@ -10,6 +10,8 @@ import java.util.Collections;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class CommandsTest {
 
@@ -19,7 +21,7 @@ public class CommandsTest {
         final Environment<String, String> environment = new EnvironmentImpl<>();
         final CommandResult commandResult = assignment.execute(Collections.emptyList(), Arrays.asList("file", "tmp"), environment);
         assertEquals("tmp", environment.get("file"));
-        assertEquals(false, commandResult.isExit());
+        assertFalse(commandResult.isExit());
     }
 
     @Test
@@ -28,7 +30,7 @@ public class CommandsTest {
         final CommandResult commandResult = cat.execute(Collections.emptyList(),
                 Collections.singletonList("src/test/resources/test_case_file.txt"), new EnvironmentImpl<>());
         assertEquals(Arrays.asList("ab cd", "e f", "   g"), commandResult.getOutput());
-        assertEquals(false, commandResult.isExit());
+        assertFalse(commandResult.isExit());
     }
 
     @Test
@@ -37,7 +39,7 @@ public class CommandsTest {
         final List<String> lines = Arrays.asList("  gfsdg sf g", " fg d");
         final CommandResult commandResult = cat.execute(lines, Collections.emptyList(), new EnvironmentImpl<>());
         assertEquals(lines, commandResult.getOutput());
-        assertEquals(false, commandResult.isExit());
+        assertFalse(commandResult.isExit());
     }
 
     @Test
@@ -46,7 +48,7 @@ public class CommandsTest {
         final CommandResult commandResult = echo.execute(Collections.emptyList(),
                 Arrays.asList("f s", " f"), new EnvironmentImpl<>());
         assertEquals(Collections.singletonList("f s  f"), commandResult.getOutput());
-        assertEquals(false, commandResult.isExit());
+        assertFalse(commandResult.isExit());
     }
 
     @Test
@@ -55,14 +57,14 @@ public class CommandsTest {
         final List<String> lines = Arrays.asList("  gfsdg sf g", " fg d");
         final CommandResult commandResult = echo.execute(lines, Collections.emptyList(), new EnvironmentImpl<>());
         assertEquals(lines, commandResult.getOutput());
-        assertEquals(false, commandResult.isExit());
+        assertFalse(commandResult.isExit());
     }
 
     @Test
     public void testExit() throws IOException {
         final Command exit = new ExitCommand();
         final CommandResult commandResult = exit.execute(Collections.emptyList(), Collections.emptyList(), new EnvironmentImpl<>());
-        assertEquals(true, commandResult.isExit());
+        assertTrue(commandResult.isExit());
     }
 
     @Test
@@ -70,7 +72,7 @@ public class CommandsTest {
         final Command wc = new WcCommand();
         final CommandResult commandResult = wc.execute(Arrays.asList("ab cd", "e f", "   g"), Collections.emptyList(), new EnvironmentImpl<>());
         assertEquals(Collections.singletonList("3 5 12"), commandResult.getOutput());
-        assertEquals(false, commandResult.isExit());
+        assertFalse(commandResult.isExit());
     }
 
     @Test
@@ -79,6 +81,6 @@ public class CommandsTest {
         final CommandResult commandResult = wc.execute(Collections.emptyList(),
                 Collections.singletonList("src/test/resources/test_case_file.txt"), new EnvironmentImpl<>());
         assertEquals(Collections.singletonList("3 5 12"), commandResult.getOutput());
-        assertEquals(false, commandResult.isExit());
+        assertFalse(commandResult.isExit());
     }
 }

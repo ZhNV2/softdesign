@@ -1,5 +1,6 @@
 package ru.spbau.zhidkov.cli.command;
 
+import ru.spbau.zhidkov.cli.commandArgsParsers.CommandArgParsingException;
 import ru.spbau.zhidkov.environment.Environment;
 
 import java.io.IOException;
@@ -13,13 +14,12 @@ public class AssignmentCommand implements Command {
 
     /**
      * Sets first argument value to second argument
-     *
      * @param input Lines of text from previous command execution (before pipe)
      * @param args arguments were provided for this command
      * @param environment environment
      */
     @Override
-    public CommandResult execute(List<String> input, List<String> args, Environment<String, String> environment) throws IOException {
+    public CommandResult execute(List<String> input, List<String> args, Environment<String, String> environment) throws IOException, CommandArgParsingException {
         if (args.size() < 2) {
             throw new IllegalStateException("assignment should have 2 parameters");
         }

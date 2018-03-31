@@ -1,6 +1,7 @@
 package ru.spbau.zhidkov.cli;
 
 import ru.spbau.zhidkov.cli.command.*;
+import ru.spbau.zhidkov.cli.commandArgsParsers.CommandArgParsingException;
 import ru.spbau.zhidkov.environment.Environment;
 import ru.spbau.zhidkov.environment.EnvironmentImpl;
 import ru.spbau.zhidkov.parser.CommandCall;
@@ -34,6 +35,7 @@ public class Cli {
         commandMap.put("exit", new ExitCommand());
         commandMap.put("wc", new WcCommand());
         commandMap.put("pwd", new PwdCommand());
+        commandMap.put("grep", new GrepCommand());
         return Collections.unmodifiableMap(commandMap);
     }
 
@@ -59,7 +61,7 @@ public class Cli {
                 CommandResult commandResult;
                 try {
                     commandResult = command.execute(lines, commandCall.getArgs(), environment);
-                } catch (IOException e) {
+                } catch (IOException | CommandArgParsingException e) {
                     System.out.println("exception during execution");
                     System.out.println(e.getClass().getName() + ": " + e.getMessage());
                     break;

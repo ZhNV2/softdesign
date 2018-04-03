@@ -1,7 +1,9 @@
-package ru.spbau.zhidkov.cli.commandArgsParsers.grep;
+package ru.spbau.zhidkov.cli.commandArgsParsers.grep.impls.apache;
 
 import org.apache.commons.cli.*;
 import ru.spbau.zhidkov.cli.commandArgsParsers.CommandArgParsingException;
+import ru.spbau.zhidkov.cli.commandArgsParsers.grep.GrepArgParsingResult;
+import ru.spbau.zhidkov.cli.commandArgsParsers.grep.GrepArgsParser;
 
 import java.util.Arrays;
 import java.util.List;
@@ -9,7 +11,7 @@ import java.util.List;
 /**
  * Implementation of <t>GrepArgsParser</t> based on apache commons cli
  */
-class GrepArgsParser_ApacheImpl implements GrepArgsParser {
+public class GrepArgsParser_ApacheImpl implements GrepArgsParser {
 
     private static final String IGNORANCE_CASE = "i";
     private static final String WORD_REGEXP = "w";

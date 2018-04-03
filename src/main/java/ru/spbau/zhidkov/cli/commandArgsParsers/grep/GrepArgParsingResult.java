@@ -12,7 +12,7 @@ public class GrepArgParsingResult {
     private String pattern;
     private String file;
 
-    GrepArgParsingResult(boolean ignoreCase, boolean wordRegexp, Integer afterContextNum, String pattern, String file) {
+    public GrepArgParsingResult(boolean ignoreCase, boolean wordRegexp, Integer afterContextNum, String pattern, String file) {
         this.ignoreCase = ignoreCase;
         this.wordRegexp = wordRegexp;
         this.afterContextNum = afterContextNum;

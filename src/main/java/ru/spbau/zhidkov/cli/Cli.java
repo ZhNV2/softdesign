@@ -55,11 +55,9 @@ public class Cli {
             List<String> lines = Collections.emptyList();
             boolean isExit = false;
             for (CommandCall commandCall : commandCalls) {
-                final Command command = commands.get(commandCall.getCommand());
+                Command command = commands.get(commandCall.getCommand());
                 if (command == null) {
-                    System.out.println("unknown command: " + commandCall.getCommand());
-                    lines = Collections.emptyList();
-                    break;
+                   command = new ExternalCommand(commandCall.getCommand());
                 }
                 CommandResult commandResult;
                 try {

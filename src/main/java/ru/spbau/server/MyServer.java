@@ -3,87 +3,69 @@ package ru.spbau.server;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
 import io.grpc.stub.StreamObserver;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import ru.spbau.MessengerServiceGrpc;
 import ru.spbau.Msg;
-import ru.spbau.commons.Cli;
+import ru.spbau.commons.AbstractPeer;
+import ru.spbau.commons.Interactor;
 
-import java.io.IOException;
-import java.util.Scanner;
+public class MyServer extends AbstractPeer {
 
-public class MyServer {
+    private final static Logger LOG = LogManager.getLogger(MyServer.class);
 
-    private Server server;
+    private final Server server;
 
-
-    private MyServer(int port, String login) {
+    public MyServer(int port, Interactor interactor) {
+        super(interactor);
+        LOG.trace("server initialized with port=" + port);
         this.server = ServerBuilder.forPort(port)
-                .addService(new ServiceImpl(login))
+                .addService(new ServiceImpl())
                 .build();
     }
 
-    private void start() throws IOException, InterruptedException {
-        server.start();
-        server.awaitTermination();
-//        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-//            // Use stderr here since the logger may have been reset by its JVM shutdown hook.
-//            System.err.println("*** shutting down gRPC server since JVM is shutting down");
-//            MyServer.this.stop();
-//            System.err.println("*** server shut down");
-//        }));
+    public void run()  {
+        LOG.debug("server run");
+        try {
+            server.start();
+            startPeerCycle();
+            shutdown();
+        } catch (Exception e) {
+            LOG.error("error during server run", e);
+        }
+    }
+
+    public void shutdown() {
+        LOG.debug("server shutdown");
+        isShutdown = true;
+        server.shutdown();
     }
 
 
 
-
-    /**
-     * Main launches the server from the command line.
-     */
-    public static void main(String[] args) throws IOException, InterruptedException {
-        if (args.length < 2) {
-            System.out.println("usage ./server port login");
-            return;
-        }
-        final int port = Integer.valueOf(args[0]);
-        final String login = args[1];
-
-        final MyServer myServer = new MyServer(port, login);
-        myServer.start();
-    }
-
-    class ServiceImpl extends MessengerServiceGrpc.MessengerServiceImplBase {
-
-        private final Cli cli;
-
-        private ServiceImpl(String login) {
-            super();
-            this.cli = new Cli(login);
-        }
+    private class ServiceImpl extends MessengerServiceGrpc.MessengerServiceImplBase {
 
         @Override
         public StreamObserver<Msg> startChat(StreamObserver<Msg> responseObserver) {
+            interlocutorPeerStream = responseObserver;
             return new StreamObserver<Msg>() {
-                {
-                    cli.start(responseObserver);
-                }
-
 
                 @Override
                 public void onNext(Msg value) {
-                    cli.write(value);
+                    LOG.trace("new message from client");
+                    interactor.write(value);
                 }
 
                 @Override
                 public void onError(Throwable t) {
-                    System.out.println("server error");
-                    server.shutdown();
-                    cli.stop();
+                    LOG.error("server onError", t);
+                    shutdown();
                 }
 
                 @Override
                 public void onCompleted() {
-                    System.out.println("server compl");
-                    server.shutdown();
-                    cli.stop();
+                    LOG.debug("server onCompleted");
+                    shutdown();
                 }
             };
         }

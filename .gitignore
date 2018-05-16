@@ -12,6 +12,7 @@
 
 # Package Files #
 *.jar
+!gradle/wrapper/gradle-wrapper.jar
 *.war
 *.ear
 *.zip
@@ -22,3 +23,6 @@
 hs_err_pid*
 
 .idea
+build/
+out/
+.gradle

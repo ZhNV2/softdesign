@@ -1,56 +1,67 @@
 package ru.spbau.commons;
 
-import io.grpc.stub.StreamObserver;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.joda.time.DateTime;
 import ru.spbau.Msg;
 
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
-public class Cli {
+public class Cli implements Interactor {
 
-    private final String userLogin;
+    private final static Logger LOG = LogManager.getLogger(Cli.class);
 
-    private Thread thread;
+    private final BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+    private final String login;
 
-    public Cli(String userLogin) {
-        this.userLogin = userLogin;
+    private boolean closed = false;
 
+    public Cli(String login) {
+        this.login = login;
     }
 
-    public void start(StreamObserver<Msg> stream) {
-        thread = new Thread(() -> {
-            final Scanner scanner = new Scanner(System.in);
-
-            while (!Thread.interrupted()) {
-                if (!scanner.hasNextLine()) {
-                    continue;
-                }
-                final String line = scanner.nextLine();
-                if (line.equals("exit")) {
-                    stream.onCompleted();
-                    break;
-                }
-                final DateTime time = DateTime.now();
-                final Msg msg = Msg.newBuilder()
-                        .setDate(time.toString())
-                        .setLogin(userLogin)
-                        .setText(line)
-                        .build();
-                stream.onNext(msg);
-                writeMessage(time, userLogin + "(you)", line);
+    @Override
+    public Msg read() {
+        try {
+            if (!reader.ready()) {
+                return null;
             }
-        });
-        thread.start();
+            final String line = reader.readLine();
+            if (line.equals("exit")) {
+                LOG.debug("cli exit");
+                close();
+                return null;
+            }
+            final DateTime time = DateTime.now();
+            return Msg.newBuilder()
+                    .setDate(time.toString())
+                    .setLogin(login)
+                    .setText(line)
+                    .build();
+        } catch (IOException e) {
+            LOG.error("error during reader read", e);
+            return null;
+        }
+
     }
 
-    public void stop() {
-        if (thread != null) {
-            thread.interrupt();
+    public void close() {
+        if (closed) {
+            return;
+        }
+        closed = true;
+        try {
+            reader.close();
+        } catch (IOException e) {
+            LOG.error("error during reader close", e);
         }
     }
 
+
+    @Override
     public void write(Msg msg) {
-        System.out.print("\r");
         writeMessage(DateTime.parse(msg.getDate()), msg.getLogin(), msg.getText());
     }
 
@@ -58,7 +69,8 @@ public class Cli {
         System.out.println(String.format("<%d:%d> [%s] %s", time.hourOfDay().get(), time.minuteOfHour().get(), login, text));
     }
 
-
-
-
+    @Override
+    public boolean isClosed() {
+        return closed;
+    }
 }

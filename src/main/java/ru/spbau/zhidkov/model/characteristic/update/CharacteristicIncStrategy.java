@@ -14,7 +14,6 @@ public class CharacteristicIncStrategy implements CharacteristicUpdateStrategy {
     }
 
 
-
     @Override
     public String desc() {
         return "+" + String.valueOf(addition);

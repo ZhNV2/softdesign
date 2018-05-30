@@ -59,9 +59,7 @@ public class Terrain implements TerrainView {
         }
     }
 
-
-
-    private boolean tryAdd(int i, int j, TerrainUnit unit) {
+    public boolean tryAdd(int i, int j, TerrainUnit unit) {
         if (get(i, j).getType() != TerrainUnit.Type.EMPTY_CELL) {
             return false;
         }

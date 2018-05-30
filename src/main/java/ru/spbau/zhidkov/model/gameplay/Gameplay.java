@@ -19,13 +19,20 @@ import java.util.Set;
 
 public class Gameplay implements Game {
 
-    private final Player player = new Player();
-    private final Terrain terrain = TerrainFactory.getINSTANCE().produceRandomTerrain(GameConstants.ROWS_CNT, GameConstants.COLUMNS_CNT);
+    private final Player player;
+    private final Terrain terrain;
 
     private int tick = 0;
     private Position playerPosition;
 
     public Gameplay() {
+        this(new Player(), TerrainFactory.getINSTANCE().produceRandomTerrain(GameConstants.ROWS_CNT, GameConstants.COLUMNS_CNT,
+                GameConstants.ROWS_CNT * GameConstants.COLUMNS_CNT / 20, 2));
+    }
+
+    Gameplay(Player player, Terrain terrain) {
+        this.player = player;
+        this.terrain = terrain;
         playerPosition = terrain.addPlayerRandomly(player);
     }
 
@@ -113,8 +120,8 @@ public class Gameplay implements Game {
 
     private void shiftCreatures() {
         final Set<TerrainUnit> used = new HashSet<>();
-        for (int i = 0; i < GameConstants.ROWS_CNT; i++) {
-            for (int j = 0; j < GameConstants.COLUMNS_CNT; j++) {
+        for (int i = 0; i < terrain.getRowsCnt(); i++) {
+            for (int j = 0; j < terrain.getColumnsCnt(); j++) {
                 final TerrainUnit terrainUnit = terrain.get(i, j);
                 if (used.contains(terrainUnit)) {
                     continue;

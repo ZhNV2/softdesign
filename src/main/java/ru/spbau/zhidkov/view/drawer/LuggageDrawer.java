@@ -24,7 +24,7 @@ abstract public class LuggageDrawer extends AbstractDrawer implements Drawer {
             final String update = fit(item.getUpdateDesc(CharacteristicName.ATTACK), 3) + "/" +
                     fit(item.getUpdateDesc(CharacteristicName.DEFENSE), 3) + "/" +
                     fit(item.getUpdateDesc(CharacteristicName.HEALTH), 3);
-            final String output = fit(item.getName(), MAX_NAME_LEN) + " " + fit(update, MAX_CHARACTERISTIC_LEN) + " " + (char)(startSymbol + i);
+            final String output = fit(item.getName(), MAX_NAME_LEN) + " " + update + " " + (char)(startSymbol + i);
             drawString(curPosition, output);
             curPosition = curPosition.plus(new Position(0, 1));
         }

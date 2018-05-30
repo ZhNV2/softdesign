@@ -36,9 +36,9 @@ public class GameDrawer implements Drawer {
         fillKeyToIdForLuggage(game.listEquipment(), 'a');
         fillKeyToIdForLuggage(game.listBackpack(), (char)('a'  + GameConstants.EQUIPMENT_LIMIT));
         mapDrawer.draw(new Position(0, 0));
-        playerCharacteristicsDrawer.draw(new Position(GameConstants.COLUMNS_CNT + 1, 0));
-        equipmentDrawer.draw(new Position(GameConstants.COLUMNS_CNT + 1, 2));
-        backpackDrawer.draw(new Position(GameConstants.COLUMNS_CNT + 1, 5 + GameConstants.EQUIPMENT_LIMIT));
+        playerCharacteristicsDrawer.draw(new Position(game.getTerrain().getColumnsCnt() + 1, 0));
+        equipmentDrawer.draw(new Position(game.getTerrain().getColumnsCnt() + 1, 2));
+        backpackDrawer.draw(new Position(game.getTerrain().getColumnsCnt() + 1, 5 + GameConstants.EQUIPMENT_LIMIT));
     }
 
     private void fillKeyToIdForLuggage(List<Item> items, char firstSymbol) {

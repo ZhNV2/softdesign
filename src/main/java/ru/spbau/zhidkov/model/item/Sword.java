@@ -7,11 +7,11 @@ import ru.spbau.zhidkov.model.characteristic.update.CharacteristicUpdateStrategy
 
 import static ru.spbau.zhidkov.model.characteristic.CharacteristicName.ATTACK;
 
-class Sword extends OneCharacteristicBooster {
+public class Sword extends OneCharacteristicBooster {
 
     private static final String NAME = "sword";
 
-    Sword(int id, int attackAddition) {
+    public Sword(int id, int attackAddition) {
         super(ATTACK, id, attackAddition);
     }
 

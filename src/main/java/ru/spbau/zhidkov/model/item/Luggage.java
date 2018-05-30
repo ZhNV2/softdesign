@@ -1,10 +1,16 @@
 package ru.spbau.zhidkov.model.item;
 
+import com.oracle.tools.packager.Log;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 public class Luggage {
+
+    private final static Logger LOG = LogManager.getLogger(Luggage.class);
 
     private final List<Item> items = new ArrayList<>();
     protected final List<LuggageAddChecker> luggageAddCheckers = new ArrayList<>();
@@ -16,6 +22,7 @@ public class Luggage {
     public boolean tryAdd(Item item) {
         for (LuggageAddChecker luggageAddChecker : luggageAddCheckers) {
             if (!luggageAddChecker.checkIfPossibleToAdd(this, item)) {
+                Log.debug("add cancel due to addChecker");
                 return false;
             }
         }

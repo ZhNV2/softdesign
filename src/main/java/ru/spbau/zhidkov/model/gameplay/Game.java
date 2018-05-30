@@ -4,7 +4,6 @@ import org.codetome.zircon.api.Position;
 import ru.spbau.zhidkov.model.characteristic.CharacteristicsSetView;
 import ru.spbau.zhidkov.model.item.Item;
 import ru.spbau.zhidkov.model.terrain.Movement;
-import ru.spbau.zhidkov.model.terrain.Terrain;
 import ru.spbau.zhidkov.model.terrain.TerrainView;
 
 import java.util.List;

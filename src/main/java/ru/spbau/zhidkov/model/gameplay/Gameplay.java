@@ -1,5 +1,7 @@
 package ru.spbau.zhidkov.model.gameplay;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.codetome.zircon.api.Position;
 import ru.spbau.zhidkov.model.characteristic.CharacteristicName;
 import ru.spbau.zhidkov.model.characteristic.CharacteristicsSetView;
@@ -18,6 +20,8 @@ import java.util.Optional;
 import java.util.Set;
 
 public class Gameplay implements Game {
+
+    private final static Logger LOG = LogManager.getLogger(Gameplay.class);
 
     private final Player player;
     private final Terrain terrain;
@@ -98,19 +102,24 @@ public class Gameplay implements Game {
 
     @Override
     public void tick() {
+        LOG.debug("tick start");
         tick++;
         shiftCreatures();
         player.setMovement(Movement.NO_MOVE);
         if (tick % GameConstants.HEALTH_UNIT_RESTORE_PERIOD == 0 &&
                 player.getCharacteristics().getValue(CharacteristicName.HEALTH) < GameConstants.MAX_PLAYER_HEALTH) {
+            LOG.debug("player's hp ++");
             player.getCharacteristics().update(CharacteristicName.HEALTH, new CharacteristicIncStrategy(1));
         }
         if (tick % GameConstants.NEW_ITEM_PERIOD == 0) {
+            LOG.debug("new item");
             terrain.addItemRandomly(ItemFactory.getINSTANCE().produceOneCharacteristicBoosterRandomItem());
         }
         if (tick % GameConstants.NEW_MOB_PERIOD == 0) {
+            LOG.debug("new mob");
             terrain.addCreatureRandomly(MobFactory.getINSTANCE().produceRandomSkeleton());
         }
+        LOG.debug("tick finish");
     }
 
     @Override
@@ -150,9 +159,11 @@ public class Gameplay implements Game {
             creature.onItem((Item) neighbor);
             terrain.set(newPosition.getRow(), newPosition.getColumn(), creature);
         } else if (neighbor.getType() == TerrainUnit.Type.CREATURE) {
+            LOG.debug("fight from (" + i + ", " + j + ") ");
             final Fight fight = new Fight(creature, (Creature) neighbor);
             terrain.set(newPosition.getRow(), newPosition.getColumn(), fight.fight());
         } else if (neighbor.getType() == TerrainUnit.Type.STONE) {
+            LOG.debug("creature on (" + i + ", " + j + ") run into cell");
             newPosition = oldPosition;
             terrain.set(i, j, creature);
         } else if (neighbor.getType() == TerrainUnit.Type.EMPTY_CELL) {

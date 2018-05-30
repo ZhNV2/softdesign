@@ -1,10 +1,5 @@
 package ru.spbau.zhidkov.model.item;
 
-import ru.spbau.zhidkov.model.characteristic.CharacteristicName;
-import ru.spbau.zhidkov.model.characteristic.CharacteristicsSet;
-import ru.spbau.zhidkov.model.characteristic.update.CharacteristicIncStrategy;
-import ru.spbau.zhidkov.model.characteristic.update.CharacteristicUpdateStrategy;
-
 import static ru.spbau.zhidkov.model.characteristic.CharacteristicName.ATTACK;
 
 public class Sword extends OneCharacteristicBooster {

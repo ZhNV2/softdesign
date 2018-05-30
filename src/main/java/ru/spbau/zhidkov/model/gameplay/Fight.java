@@ -1,10 +1,14 @@
 package ru.spbau.zhidkov.model.gameplay;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import ru.spbau.zhidkov.model.characteristic.CharacteristicName;
 import ru.spbau.zhidkov.model.characteristic.update.CharacteristicIncStrategy;
 import ru.spbau.zhidkov.model.creature.Creature;
 
 public class Fight {
+
+    private final static Logger LOG = LogManager.getLogger(Fight.class);
 
     private final Creature first;
     private final Creature second;
@@ -12,6 +16,7 @@ public class Fight {
     public Fight(Creature first, Creature second) {
         this.first = first;
         this.second = second;
+        LOG.debug("fight created");
     }
 
     public Creature fight() {
@@ -20,6 +25,7 @@ public class Fight {
             attack(creatures[0], creatures[1]);
             if (creatures[1].getCharacteristics().getValue(CharacteristicName.HEALTH) <= 0) {
                 creatures[1].onDepth();
+                LOG.debug("fight finished");
                 return creatures[0];
             }
             Creature tmp = creatures[0];

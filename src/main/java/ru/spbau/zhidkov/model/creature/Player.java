@@ -1,5 +1,7 @@
 package ru.spbau.zhidkov.model.creature;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.codetome.zircon.api.Position;
 import ru.spbau.zhidkov.model.characteristic.CharacteristicsSet;
 import ru.spbau.zhidkov.model.item.Item;
@@ -12,6 +14,8 @@ import java.util.List;
 import java.util.Optional;
 
 public class Player implements Creature {
+
+    private final static Logger LOG = LogManager.getLogger(Player.class);
 
     private final Luggage backpack = new Luggage(GameConstants.BACKPACK_LIMIT);
     private final Luggage equipment = new Luggage(GameConstants.EQUIPMENT_LIMIT);
@@ -38,6 +42,7 @@ public class Player implements Creature {
     }
 
     public boolean tryAddToEquipment(Item item) {
+        LOG.debug("try add to equipment id = " + item.getId());
         if (equipment.tryAdd(item)) {
             item.onEquip(characteristicsSet);
             return true;
@@ -46,10 +51,12 @@ public class Player implements Creature {
     }
 
     public boolean tryAddToBackpack(Item item) {
+        LOG.debug("try add to backpack id = "  + item.getId());
         return backpack.tryAdd(item);
     }
 
     public boolean deleteFromEquipment(int id) {
+        LOG.debug("delete from equipment id = ", id);
         final Optional<Item> item = getFromEquipment(id);
         if (item.isPresent()) {
             item.get().unEquip(characteristicsSet);
@@ -59,6 +66,7 @@ public class Player implements Creature {
     }
 
     public boolean deleteFromBackpack(int id) {
+        LOG.debug("delete from backpack id = " + id);
         return backpack.delete(id);
     }
 

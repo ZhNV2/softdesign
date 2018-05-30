@@ -37,7 +37,7 @@ public class Gameplay implements Game {
     Gameplay(Player player, Terrain terrain) {
         this.player = player;
         this.terrain = terrain;
-        playerPosition = terrain.addPlayerRandomly(player);
+        playerPosition = terrain.addRandomly(player);
     }
 
     @Override
@@ -113,11 +113,11 @@ public class Gameplay implements Game {
         }
         if (tick % GameConstants.NEW_ITEM_PERIOD == 0) {
             LOG.debug("new item");
-            terrain.addItemRandomly(ItemFactory.getINSTANCE().produceOneCharacteristicBoosterRandomItem());
+            terrain.addRandomly(ItemFactory.getINSTANCE().produceOneCharacteristicBoosterRandomItem());
         }
         if (tick % GameConstants.NEW_MOB_PERIOD == 0) {
             LOG.debug("new mob");
-            terrain.addCreatureRandomly(MobFactory.getINSTANCE().produceRandomSkeleton());
+            terrain.addRandomly(MobFactory.getINSTANCE().produceRandomSkeleton());
         }
         LOG.debug("tick finish");
     }

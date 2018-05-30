@@ -1,8 +1,6 @@
 package ru.spbau.zhidkov.model.terrain;
 
 import org.codetome.zircon.api.Position;
-import ru.spbau.zhidkov.model.creature.Creature;
-import ru.spbau.zhidkov.model.item.Item;
 import ru.spbau.zhidkov.model.utils.Random;
 
 public class Terrain implements TerrainView {
@@ -36,24 +34,11 @@ public class Terrain implements TerrainView {
         return map[row][column];
     }
 
-    public void addStoneRandomly() {
-        final TerrainUnit stone = Stone.getINSTANCE();
-        while (!tryAdd(random.rand(0, rowsCnt - 1), random.rand(0, columnsCnt - 1), stone));
-    }
-
-    public void addItemRandomly(Item item) {
-        while (!tryAdd(random.rand(0, rowsCnt - 1), random.rand(0, columnsCnt - 1), item));
-    }
-
-    public void addCreatureRandomly(Creature creature) {
-        while (!tryAdd(random.rand(0, rowsCnt - 1), random.rand(0, columnsCnt - 1), creature));
-    }
-
-    public Position addPlayerRandomly(Creature player) {
+    public Position addRandomly(TerrainUnit unit) {
         while (true) {
             int row = random.rand(0, rowsCnt - 1);
             int col = random.rand(0, columnsCnt - 1);
-            if (tryAdd(row, col, player)) {
+            if (tryAdd(row, col, unit)) {
                 return new Position(col, row);
             }
         }

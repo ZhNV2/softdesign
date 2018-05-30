@@ -24,11 +24,11 @@ public class TerrainFactory {
         final Terrain terrain = new Terrain(rowsCnt, columnsCnt);
         final int stonesCnt = RANDOM.rand(0, maxStones);
         for (int i = 0; i < stonesCnt; i++) {
-            terrain.addStoneRandomly();
+            terrain.addRandomly(Stone.getINSTANCE());
         }
         final int skeletonsCnt = RANDOM.rand(0, maxSkeletons);
         for (int i = 0; i < skeletonsCnt; i++) {
-            terrain.addCreatureRandomly(MobFactory.getINSTANCE().produceRandomSkeleton());
+            terrain.addRandomly(MobFactory.getINSTANCE().produceRandomSkeleton());
         }
         return terrain;
     }

@@ -23,8 +23,10 @@ public class Skeleton extends Mob {
     }
 
     @Override
-    public void onDepth() {}
+    public void onDepth() {
+    }
 
     @Override
-    public void onItem(Item item) { }
+    public void onItem(Item item) {
+    }
 }

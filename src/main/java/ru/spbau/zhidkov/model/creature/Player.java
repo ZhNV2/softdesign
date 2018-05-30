@@ -27,10 +27,6 @@ public class Player implements Creature {
         this.movement = movement;
     }
 
-    public Movement getMovement() {
-        return movement;
-    }
-
     @Override
     public Movement move(Position position, Terrain terrain) {
         return movement;

@@ -2,7 +2,6 @@ package ru.spbau.zhidkov.model.terrain;
 
 import org.codetome.zircon.api.Position;
 import ru.spbau.zhidkov.model.creature.Creature;
-import ru.spbau.zhidkov.model.creature.Player;
 import ru.spbau.zhidkov.model.item.Item;
 import ru.spbau.zhidkov.model.utils.Random;
 

@@ -3,8 +3,15 @@ package ru.spbau.client;
 import ru.spbau.commons.Cli;
 import ru.spbau.commons.Interactor;
 
+/**
+ * Client's main
+ */
 public class Main {
 
+    /**
+     * Runs server
+     * @param args should contain host, port and login
+     */
     public static void main(String[] args) {
         if (args.length < 3) {
             System.out.println("usage: ./client host port login");

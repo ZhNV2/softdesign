@@ -12,6 +12,9 @@ import ru.spbau.commons.Interactor;
 
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Client class (peer that should connect to server)
+ */
 public class Client extends AbstractPeer {
 
     private final static Logger LOG = LogManager.getLogger(Client.class);
@@ -30,6 +33,9 @@ public class Client extends AbstractPeer {
         this.stub = MessengerServiceGrpc.newStub(channel);
     }
 
+    /**
+     * Connects to the server
+     */
     public void connect() {
         LOG.debug("client connect");
         interlocutorPeerStream = stub.startChat(new StreamObserver<Msg>() {
@@ -54,6 +60,9 @@ public class Client extends AbstractPeer {
         });
     }
 
+    /**
+     * starts client
+     */
     public void run() {
         LOG.debug("client run");
 
@@ -62,6 +71,9 @@ public class Client extends AbstractPeer {
 
     }
 
+    /**
+     * terminates client's workflow
+     */
     public void shutdown()  {
         try {
             LOG.debug("client shutdown");

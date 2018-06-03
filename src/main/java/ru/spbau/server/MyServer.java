@@ -10,6 +10,9 @@ import ru.spbau.Msg;
 import ru.spbau.commons.AbstractPeer;
 import ru.spbau.commons.Interactor;
 
+/**
+ * Server class (peer that should be started firstly)
+ */
 public class MyServer extends AbstractPeer {
 
     private final static Logger LOG = LogManager.getLogger(MyServer.class);
@@ -24,6 +27,9 @@ public class MyServer extends AbstractPeer {
                 .build();
     }
 
+    /**
+     * starts running
+     */
     public void run()  {
         LOG.debug("server run");
         try {
@@ -35,6 +41,9 @@ public class MyServer extends AbstractPeer {
         }
     }
 
+    /**
+     * terminates server workflow
+     */
     public void shutdown() {
         LOG.debug("server shutdown");
         isShutdown = true;
@@ -42,9 +51,16 @@ public class MyServer extends AbstractPeer {
     }
 
 
-
+    /**
+     * Class describing service for server-client communication
+     */
     private class ServiceImpl extends MessengerServiceGrpc.MessengerServiceImplBase {
 
+        /**
+         * Starts server-client communication by <t>StreamObserver</t> exchanging
+         * @param responseObserver client observer for server to run code on client side
+         * @return server observer for client to run code on server side
+         */
         @Override
         public StreamObserver<Msg> startChat(StreamObserver<Msg> responseObserver) {
             interlocutorPeerStream = responseObserver;

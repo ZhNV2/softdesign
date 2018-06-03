@@ -1,0 +1,82 @@
+group 'ru.spbau'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'com.google.protobuf'
+apply plugin: 'idea'
+
+sourceCompatibility = 1.8
+
+task client(type: Jar) {
+    manifest {
+        attributes 'Implementation-Title': 'client',
+                'Implementation-Version': version,
+                'Main-Class': 'ru.spbau.client.Main'
+    }
+    baseName = 'client-' + project.name + '-all'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
+
+task server(type: Jar) {
+    manifest {
+        attributes 'Implementation-Title': 'server',
+                'Implementation-Version': version,
+                'Main-Class': 'ru.spbau.server.Main'
+    }
+    baseName = 'server-' + project.name + '-all'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
+
+
+
+repositories {
+    mavenCentral()
+}
+
+buildscript {
+    repositories {
+        maven { url "https://plugins.gradle.org/m2/" }
+    }
+    dependencies {
+        classpath 'com.google.protobuf:protobuf-gradle-plugin:0.8.4'
+    }
+}
+
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    testCompile group: 'org.mockito', name: 'mockito-all', version: '1.8.4'
+    compile 'com.google.protobuf:protobuf-java:3.0.0'
+    compile 'io.grpc:grpc-stub:1.0.0-pre2'
+    compile 'io.grpc:grpc-protobuf:1.0.0-pre2'
+    compile "io.grpc:grpc-netty:1.0.0-pre2"
+    compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.11.0'
+    compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.11.0'
+    compile group: 'joda-time', name: 'joda-time', version: '2.3'
+}
+
+protobuf {
+    protoc {
+        // The artifact spec for the Protobuf Compiler
+        artifact = 'com.google.protobuf:protoc:3.0.0'
+    }
+    plugins {
+        // Optional: an artifact spec for a protoc plugin, with "grpc" as
+        // the identifier, which can be referred to in the "plugins"
+        // container of the "generateProtoTasks" closure.
+        grpc {
+            artifact = 'io.grpc:protoc-gen-grpc-java:1.0.0-pre2'
+        }
+    }
+    generateProtoTasks {
+        ofSourceSet('main')*.plugins {
+            // Apply the "grpc" plugin whose spec is defined above, without
+            // options.  Note the braces cannot be omitted, otherwise the
+            // plugin will not be added. This is because of the implicit way
+            // NamedDomainObjectContainer binds the methods.
+            grpc {}
+        }
+    }
+}

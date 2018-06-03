@@ -1,5 +1,8 @@
 package ru.spbau.zhidkov.model.utils;
 
+/**
+ * Class describing custom random generator
+ */
 public class Random {
 
     private final static java.util.Random random = new java.util.Random();

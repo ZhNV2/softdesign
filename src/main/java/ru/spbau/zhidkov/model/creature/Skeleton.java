@@ -7,6 +7,9 @@ import ru.spbau.zhidkov.model.utils.Random;
 import ru.spbau.zhidkov.model.terrain.Movement;
 import ru.spbau.zhidkov.model.terrain.Terrain;
 
+/**
+ * Class for the weakest mob - skeleton
+ */
 public class Skeleton extends Mob {
 
     private final static int INITIAL_DEFENSE = 0;

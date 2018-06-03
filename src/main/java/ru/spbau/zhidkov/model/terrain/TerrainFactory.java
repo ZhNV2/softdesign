@@ -5,6 +5,9 @@ import org.apache.logging.log4j.Logger;
 import ru.spbau.zhidkov.model.creature.MobFactory;
 import ru.spbau.zhidkov.model.utils.Random;
 
+/**
+ * Factory for generating game maps
+ */
 public class TerrainFactory {
 
     private final static Logger LOG = LogManager.getLogger(TerrainFactory.class);

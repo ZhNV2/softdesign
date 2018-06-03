@@ -5,6 +5,9 @@ import ru.spbau.zhidkov.model.characteristic.CharacteristicsSet;
 import ru.spbau.zhidkov.model.characteristic.update.CharacteristicIncStrategy;
 import ru.spbau.zhidkov.model.characteristic.update.CharacteristicUpdateStrategy;
 
+/**
+ * Abstract class for items that boosts only one characteristic
+ */
 abstract public class OneCharacteristicBooster implements Item {
 
     private final CharacteristicName characteristic;

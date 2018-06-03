@@ -1,5 +1,9 @@
 package ru.spbau.zhidkov.model.item;
 
+/**
+ * Class checking whether size of luggage will exceed limit after
+ * addition or not
+ */
 public class LuggageSizeChecker implements LuggageAddChecker {
 
     private final int limit;

@@ -1,5 +1,8 @@
 package ru.spbau.zhidkov.model.terrain;
 
+/**
+ * Singleton for stones
+ */
 public class Stone implements TerrainUnit {
 
     private static final Stone INSTANCE = new Stone();

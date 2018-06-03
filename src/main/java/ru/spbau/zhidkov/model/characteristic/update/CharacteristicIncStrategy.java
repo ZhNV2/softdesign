@@ -1,5 +1,8 @@
 package ru.spbau.zhidkov.model.characteristic.update;
 
+/**
+ * Class describing incremental characteristic update strategy
+ */
 public class CharacteristicIncStrategy implements CharacteristicUpdateStrategy {
 
     private final int addition;

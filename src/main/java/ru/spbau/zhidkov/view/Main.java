@@ -8,7 +8,9 @@ import ru.spbau.zhidkov.model.gameplay.Game;
 import ru.spbau.zhidkov.model.gameplay.Gameplay;
 import ru.spbau.zhidkov.view.drawer.GameDrawer;
 
-
+/**
+ * Class for running game
+ */
 public class Main {
 
     public static void main(String[] args) throws InterruptedException {

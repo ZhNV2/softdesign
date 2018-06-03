@@ -9,6 +9,9 @@ import ru.spbau.zhidkov.model.terrain.TerrainView;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Main interface for interaction with model component
+ */
 public interface Game {
 
     Position getPlayerPosition();

@@ -3,6 +3,9 @@ package ru.spbau.zhidkov.model.creature;
 
 import ru.spbau.zhidkov.model.utils.Random;
 
+/**
+ * Factory creating mobs
+ */
 public class MobFactory {
 
     private final static Random random = new Random();

@@ -8,6 +8,9 @@ import ru.spbau.zhidkov.model.item.Item;
 
 import java.util.List;
 
+/**
+ * Class for list items drawers common methods
+ */
 abstract public class LuggageDrawer extends AbstractDrawer implements Drawer {
 
     private static final int MAX_NAME_LEN = 10;

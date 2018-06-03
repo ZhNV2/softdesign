@@ -6,6 +6,9 @@ import ru.spbau.zhidkov.model.characteristic.CharacteristicName;
 import ru.spbau.zhidkov.model.characteristic.CharacteristicsSetView;
 import ru.spbau.zhidkov.model.gameplay.Game;
 
+/**
+ * Class drawing player characteristics on screen
+ */
 public class PlayerCharacteristicsDrawer extends AbstractDrawer implements Drawer {
 
     private final static int MAX_LEN = 25;

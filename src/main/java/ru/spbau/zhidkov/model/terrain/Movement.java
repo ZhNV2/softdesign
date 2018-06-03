@@ -3,6 +3,9 @@ package ru.spbau.zhidkov.model.terrain;
 
 import org.codetome.zircon.api.Position;
 
+/**
+ * Enum for possible creature movements
+ */
 public enum Movement {
 
     UP(-1, 0),

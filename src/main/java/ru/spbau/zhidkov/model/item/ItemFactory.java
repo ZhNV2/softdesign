@@ -3,6 +3,9 @@ package ru.spbau.zhidkov.model.item;
 
 import ru.spbau.zhidkov.model.utils.Random;
 
+/**
+ * Factory generating items
+ */
 public class ItemFactory {
 
     private static final ItemFactory INSTANCE = new ItemFactory();

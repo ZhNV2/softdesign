@@ -1,5 +1,8 @@
 package ru.spbau.zhidkov.model.utils;
 
+/**
+ * Common game constants
+ */
 public class GameConstants {
     public final static int ROWS_CNT = 30;
     public final static int COLUMNS_CNT = 30;

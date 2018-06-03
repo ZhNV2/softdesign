@@ -6,6 +6,9 @@ import ru.spbau.zhidkov.model.gameplay.Game;
 import ru.spbau.zhidkov.model.terrain.TerrainUnit;
 import ru.spbau.zhidkov.model.terrain.TerrainView;
 
+/**
+ * Class drawing map on screen
+ */
 public class MapDrawer extends AbstractDrawer implements Drawer {
 
     public MapDrawer(Game game, Terminal terminal) {

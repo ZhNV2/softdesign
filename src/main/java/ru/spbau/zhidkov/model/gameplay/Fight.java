@@ -6,6 +6,9 @@ import ru.spbau.zhidkov.model.characteristic.CharacteristicName;
 import ru.spbau.zhidkov.model.characteristic.update.CharacteristicIncStrategy;
 import ru.spbau.zhidkov.model.creature.Creature;
 
+/**
+ * Class describing fight strategy (rules for fight)
+ */
 public class Fight {
 
     private final static Logger LOG = LogManager.getLogger(Fight.class);

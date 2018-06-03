@@ -10,6 +10,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Class responsible for drawing game state on screen.
+ * It does not draw by itself, it calls other drawers in right positions.
+ */
 public class GameDrawer implements Drawer {
 
     private final Map<Character, Integer> keyToId = new HashMap<>();

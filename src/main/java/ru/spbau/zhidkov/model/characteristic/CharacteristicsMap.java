@@ -3,6 +3,12 @@ package ru.spbau.zhidkov.model.characteristic;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Class wrapping <t>Map<CharacteristicName, T</t> and providing
+ * basic methods
+ *
+ * @param <T> value
+ */
 public class CharacteristicsMap<T> {
 
     private final Map<CharacteristicName, T> map;

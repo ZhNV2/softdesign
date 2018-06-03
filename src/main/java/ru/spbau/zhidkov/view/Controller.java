@@ -12,6 +12,9 @@ import ru.spbau.zhidkov.view.drawer.GameDrawer;
 
 import java.util.Optional;
 
+/**
+ * Class translating key presses to game changes
+ */
 public class Controller {
 
     private final static Logger LOG = LogManager.getLogger(Controller.class);

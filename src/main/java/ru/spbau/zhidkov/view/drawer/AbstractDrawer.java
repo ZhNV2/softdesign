@@ -4,6 +4,9 @@ import org.codetome.zircon.api.Position;
 import org.codetome.zircon.api.terminal.Terminal;
 import ru.spbau.zhidkov.model.gameplay.Game;
 
+/**
+ * Class for common drawers' methods
+ */
 abstract public class AbstractDrawer {
 
     protected final Game game;

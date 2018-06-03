@@ -7,6 +7,9 @@ import ru.spbau.zhidkov.model.terrain.Movement;
 import ru.spbau.zhidkov.model.terrain.Terrain;
 import ru.spbau.zhidkov.model.terrain.TerrainUnit;
 
+/**
+ * Base interface for creatures presented in game
+ */
 public interface Creature extends TerrainUnit {
 
     Movement move(Position position, Terrain terrain);

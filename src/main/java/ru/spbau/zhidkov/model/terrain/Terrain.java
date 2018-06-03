@@ -3,6 +3,10 @@ package ru.spbau.zhidkov.model.terrain;
 import org.codetome.zircon.api.Position;
 import ru.spbau.zhidkov.model.utils.Random;
 
+/**
+ * Class describing game map and providing methods for it
+ * change and access.
+ */
 public class Terrain implements TerrainView {
 
     private static final Random random = new Random();

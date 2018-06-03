@@ -19,6 +19,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+/**
+ * Class where all basic game mechanisms are implemented
+ */
 public class Gameplay implements Game {
 
     private final static Logger LOG = LogManager.getLogger(Gameplay.class);

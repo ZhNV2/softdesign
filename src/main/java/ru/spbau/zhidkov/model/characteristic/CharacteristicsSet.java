@@ -2,6 +2,9 @@ package ru.spbau.zhidkov.model.characteristic;
 
 import ru.spbau.zhidkov.model.characteristic.update.CharacteristicUpdateStrategy;
 
+/**
+ * Class storing characteristics
+ */
 public class CharacteristicsSet implements CharacteristicsSetView {
 
     private final CharacteristicsMap<Integer> characteristicsToValue;

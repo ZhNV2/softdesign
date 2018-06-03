@@ -13,6 +13,9 @@ import ru.spbau.zhidkov.model.utils.GameConstants;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Class describing player
+ */
 public class Player implements Creature {
 
     private final static Logger LOG = LogManager.getLogger(Player.class);

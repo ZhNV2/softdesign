@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Class-container for items.
+ */
 public class Luggage {
 
     private final static Logger LOG = LogManager.getLogger(Luggage.class);

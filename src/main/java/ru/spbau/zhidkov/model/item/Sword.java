@@ -2,6 +2,9 @@ package ru.spbau.zhidkov.model.item;
 
 import static ru.spbau.zhidkov.model.characteristic.CharacteristicName.ATTACK;
 
+/**
+ * Item that boosts only attack characteristics
+ */
 public class Sword extends OneCharacteristicBooster {
 
     private static final String NAME = "sword";

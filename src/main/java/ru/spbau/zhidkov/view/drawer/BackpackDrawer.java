@@ -5,6 +5,9 @@ import org.codetome.zircon.api.terminal.Terminal;
 import ru.spbau.zhidkov.model.gameplay.Game;
 import ru.spbau.zhidkov.model.utils.GameConstants;
 
+/**
+ * Class drawing backpack on screen
+ */
 public class BackpackDrawer extends LuggageDrawer {
 
     public BackpackDrawer(Game game, Terminal terminal) {
